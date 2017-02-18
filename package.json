@@ -1,0 +1,14 @@
+{
+  "Name": "my-first-react-app",
+  "version": "1.0.0",
+  "description": "It is my firts app with used ReactJS",
+  "main": "index.html",
+  "script": {
+    "start": "node server.js"
+  },
+  "author": "Dmitriy Barchuk",
+  "licence": "MIT",
+  "devDependencies": {
+    "express": "^4.14.1"
+  }
+}
