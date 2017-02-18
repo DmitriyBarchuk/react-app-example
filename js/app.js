@@ -10,6 +10,18 @@ var my_news = [
   {
     author: 'Гость',
     text: 'Reclama, tyta, translit aaaaaaa'
+  },
+  {
+    author: 'Alex Barchuk',
+    text: 'Hi, text bla bla, test'
+  },
+  {
+    author: 'Dmitriy Barchuk',
+    text: 'I just learn ReactJS'
+  },
+  {
+    author: 'Гость',
+    text: 'Reclama, tyta, translit aaaaaaa'
   }
 ];
 
@@ -26,7 +38,10 @@ var Comments = React.createClass({
 var News = React.createClass({
   render: function() {
     var data = this.props.data;
-    var newsTemplate = data.map(function(item, index) {
+    var newsTemplate;
+
+    if (data.length > 0) {
+    newsTemplate = data.map(function(item, index) {
     return (
       <div key={index}>
         <p className="news_author">{item.author}:</p>
@@ -34,12 +49,14 @@ var News = React.createClass({
       </div>
     )
   })
+} else {
+  newsTemplate = <p>К сожалению новостей нет </p>
+}
 
-    console.log(newsTemplate);
-    
     return (
       <div className="news">
         {newsTemplate}
+        <strong className={data.length > 0 ? '':'none'}>Всего новостей: {data.length}</strong>
       </div>
     );
   }
