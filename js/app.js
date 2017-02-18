@@ -1,37 +1,29 @@
 var my_news = [
   {
-    author: 'Alex Barchuk',
-    text: 'Hi, text bla bla, test'
+    author: 'Саша Печкин',
+    text: 'В четчерг, четвертого числа...'
   },
   {
-    author: 'Dmitriy Barchuk',
-    text: 'I just learn ReactJS'
-  },
-  {
-    author: 'Гость',
-    text: 'Reclama, tyta, translit aaaaaaa'
-  },
-  {
-    author: 'Alex Barchuk',
-    text: 'Hi, text bla bla, test'
-  },
-  {
-    author: 'Dmitriy Barchuk',
-    text: 'I just learn ReactJS'
+    author: 'Просто Вася',
+    text: 'Считаю, что $ должен стоить 35 рублей!'
   },
   {
     author: 'Гость',
-    text: 'Reclama, tyta, translit aaaaaaa'
+    text: 'Бесплатно. Скачать. Лучший сайт - http://localhost:3000'
   }
 ];
 
-var Comments = React.createClass({
+var Article = React.createClass({
   render: function() {
+    var author = this.props.data.author,
+        text = this.props.data.text;
+
     return (
-      <div className="comments">
-        No news - nothing to comment.
+      <div className='article'>
+        <p className='news__author'>{author}:</p>
+        <p className='news__text'>{text}</p>
       </div>
-    );
+    )
   }
 });
 
@@ -41,22 +33,21 @@ var News = React.createClass({
     var newsTemplate;
 
     if (data.length > 0) {
-    newsTemplate = data.map(function(item, index) {
-    return (
-      <div key={index}>
-        <p className="news_author">{item.author}:</p>
-        <p className="news_text">{item.text}</p>
-      </div>
-    )
-  })
-} else {
-  newsTemplate = <p>К сожалению новостей нет </p>
-}
+      newsTemplate = data.map(function(item, index) {
+        return (
+          <div key={index}>
+            <Article data={item} />
+          </div>
+        )
+      })
+    } else {
+      newsTemplate = <p>К сожалению новостей нет</p>
+    }
 
     return (
-      <div className="news">
+      <div className='news'>
         {newsTemplate}
-        <strong className={data.length > 0 ? '':'none'}>Всего новостей: {data.length}</strong>
+        <strong className={'news__count ' + (data.length > 0 ? '':'none') }>Всего новостей: {data.length}</strong>
       </div>
     );
   }
@@ -65,9 +56,9 @@ var News = React.createClass({
 var App = React.createClass({
   render: function() {
     return (
-      <div className="app">
-        Hi all, i am a React component!!!
-        <News data={my_news} /> {/* Добавление свойства (data - название не имеет значния)*/}
+      <div className='app'>
+        <h3>Новости</h3>
+        <News data={my_news} />
       </div>
     );
   }
